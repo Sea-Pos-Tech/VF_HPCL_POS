@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config><!--cleartextTrafficPermitted="true"-->
+        <domain includeSubdomains="true">dtpapi.mloyalcapture.com</domain>
+    </domain-config>
+    <base-config>
+        <trust-anchors>
+            <!--Trust preinstalled CAs-->
+            <certificates src="system"/>
+          <!-- <certificates src="@raw/mloyalcapture"/>-->
+            <!--Additionally trust user added CAs-->
+           <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
