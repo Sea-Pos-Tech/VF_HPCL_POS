@@ -30,16 +30,13 @@ object AppModule {
         return Retrofit.Builder()
             .baseUrl(APP_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okhttpClient())
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(AuthInterceptor())
+                    .build()
+            )
             .build()
             .create(Api::class.java)
-    }
-
-
-    private fun okhttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor())
-            .build()
     }
 
     @Provides

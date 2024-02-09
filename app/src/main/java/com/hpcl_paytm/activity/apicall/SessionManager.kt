@@ -19,8 +19,7 @@ class SessionManager {
             System.currentTimeMillis() + expiresIn * 1000 // Convert expiresIn to milliseconds
     }
 
-    fun getAccessToken():String{
-        return accessToken?:""
+    fun getAccessToken(): String {
+        return accessToken ?: ""
     }
-    // Other session management methods
 }

@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(
     private val api: Api
-): Repository {
+) : Repository {
     override suspend fun getToken(): TokenResponse = api.refreshAccessToken()
 }
