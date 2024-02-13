@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
+    tools:context=".activities.dashboard.TransactionDashboardActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_height="50dp"
+                android:background="@drawable/homepage_logo">
+            </ImageView>
+
+
+          <TextView
+            android:fontFamily="@font/ptregular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:textSize="@dimen/_20sdp"
+            android:lines="1"
+            android:textStyle="normal"
+            android:text="Key Exchange"
+            android:textColor="@color/white">
+           </TextView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/rounded_fragment_white"
+                app:boxStrokeColor="@color/light_blue">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:hint="@string/iac_id"
+                    app:counterMaxLength="10"
+                    android:textColorHint="@color/light_blue"
+                    app:boxStrokeColor="@color/light_blue"
+                    app:hintTextColor="@color/colorBlack"
+                    app:layout_constraintTop_toTopOf="@+id/constLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:inputType="text"
+                        android:longClickable="false"
+                        android:id="@+id/iac_id_edit_text"
+                        android:text=""
+                        android:maxLength="16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/confirm"
+                android:text="@string/confirm"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginBottom="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_width="match_parent"
+                android:textColor="@color/colorBlack"
+                app:backgroundTint="@null"
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/button_drawable_layout"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>

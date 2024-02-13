@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout"
+        android:background="@drawable/background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="50dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/gotoBack"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/back_icon"
+                        android:visibility="invisible">
+
+                    </ImageView>
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/textHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/robotomedium"
+                    android:gravity="center"
+                    android:text="@string/unblockcardpin"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="normal">
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/timer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/rounded_fragment_white"
+                app:boxStrokeColor="@color/light_blue">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlinedOldPin"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:hint="@string/enteroldpin"
+                    app:passwordToggleEnabled="true"
+                    android:textColorHint="@color/light_blue"
+                    app:boxStrokeColor="@color/light_blue"
+                    app:hintTextColor="@color/colorBlack"
+                    app:layout_constraintTop_toTopOf="@+id/constLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/old_pin_EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="4" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlinedTextField1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:hint="@string/enternewpin"
+                    app:passwordToggleEnabled="true"
+                    android:textColorHint="@color/light_blue"
+                    app:boxStrokeColor="@color/light_blue"
+                    app:hintTextColor="@color/colorBlack"
+                    app:layout_constraintTop_toBottomOf="@+id/outlinedOldPin">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/rocNo_EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="4" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlinedTextField2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    app:passwordToggleEnabled="true"
+                    android:hint="@string/reenternewpin"
+                    android:textColorHint="@color/light_blue"
+                    app:hintTextColor="@color/colorBlack"
+                    app:layout_constraintTop_toBottomOf="@+id/outlinedTextField1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/reEnterrocNo_EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:inputType="number"
+                        android:maxLength="4" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/confirm"
+                android:text="@string/confirm"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginBottom="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_width="match_parent"
+                android:textColor="@color/colorBlack"
+                app:backgroundTint="@null"
+                android:textSize="@dimen/_13sdp"
+                android:background="@drawable/button_drawable_layout"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

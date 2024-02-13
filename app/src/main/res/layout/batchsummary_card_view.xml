@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_5dp"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/typeRelativeLayout">
+            <TextView
+                android:id="@+id/typetextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:text="@string/type"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+                android:gravity="right"
+                android:layout_marginRight="@dimen/_15dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/typetextView" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_below="@+id/type"
+                android:layout_height="1dp"
+                android:background="#F5F5F5"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/_15dp"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/modeRelativeLayput"
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_below="@id/typeRelativeLayout">
+
+        <TextView
+            android:id="@+id/modetextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="@string/mode"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="15sp"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/_15dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/modetextView" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_below="@+id/mode"
+            android:layout_height="1dp"
+            android:background="#F5F5F5"
+            android:layout_marginTop="5dp"
+            android:alpha="50"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/countRelativeLayput"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_below="@id/modeRelativeLayput">
+
+            <TextView
+                android:id="@+id/counttextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:text="@string/count"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="15sp"
+                android:gravity="right"
+                android:layout_marginRight="@dimen/_15dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/counttextView" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_below="@+id/count"
+                android:layout_height="1dp"
+                android:background="#F5F5F5"
+                android:layout_marginRight="@dimen/_15dp"
+                android:layout_marginTop="5dp"
+                android:alpha="50"
+                android:layout_marginLeft="15dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_15dp"
+            android:id="@+id/totalRelativeLayput"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_below="@id/countRelativeLayput">
+
+            <TextView
+                android:id="@+id/totalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="right"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

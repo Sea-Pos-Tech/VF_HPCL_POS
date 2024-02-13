@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_height="50dp"
+                android:background="@drawable/homepage_logo">
+            </ImageView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="50dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:visibility="invisible"
+                        android:id="@+id/gotoBack"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/back_icon">
+
+                    </ImageView>
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/textstylemediumwhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/payback"/>
+
+                <LinearLayout
+                    android:layout_width="35dp"
+                    android:gravity="center"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:id="@+id/timer"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                    </TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:id="@+id/parent_linear_layout"
+                android:layout_marginRight="30dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/pbEarn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/rounded_select_backgrnd"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptregular"
+                        android:gravity="center"
+                        android:text="@string/earn"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp">
+
+                    </TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/pbBurn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="40dp"
+                    android:visibility="gone"
+                    android:background="@drawable/rounded_select_backgrnd"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptregular"
+                        android:gravity="center"
+                        android:text="@string/burn"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp">
+
+                    </TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/pbVoid"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="40dp"
+                    android:visibility="gone"
+                    android:background="@drawable/rounded_select_backgrnd"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ptregular"
+                        android:gravity="center"
+                        android:text="VOID"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp">
+
+                    </TextView>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
