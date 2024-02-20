@@ -2,12 +2,12 @@ package com.hpcl_paytm.activity.di
 
 import android.content.Context
 import androidx.room.Room
-import com.hpcl_paytm.activity.apicall.Api
+import com.hpcl_paytm.activity.apicall.APIService
 import com.hpcl_paytm.activity.apicall.AuthInterceptor
 import com.hpcl_paytm.activity.apicall.Repository
 import com.hpcl_paytm.activity.apicall.RepositoryImpl
+import com.hpcl_paytm.activity.apicall.Utils
 import com.hpcl_paytm.activity.room.AppRoomDatabase
-import com.hpcl_paytm.activity.room.PostDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,13 +22,12 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    private const val APP_BASE_URL = ""
 
     @Provides
     @Singleton
-    fun provideApiInstance(): Api {
+    fun provideApiInstance(): APIService {
         return Retrofit.Builder()
-            .baseUrl(APP_BASE_URL)
+            .baseUrl(Utils.MAIN_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
@@ -36,7 +35,7 @@ object AppModule {
                     .build()
             )
             .build()
-            .create(Api::class.java)
+            .create(APIService::class.java)
     }
 
     @Provides
@@ -51,7 +50,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApiRepository(api: Api): Repository {
+    fun provideApiRepository(api: APIService): Repository {
         return RepositoryImpl(api)
     }
 }

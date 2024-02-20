@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -16,14 +17,35 @@
         android:name=".activity.MyApplication"
         tools:targetApi="31">
 
+
         <activity
-            android:name=".activity.MainActivity"
-            android:exported="true" >
+            android:name="com.hpcl_paytm.activity.home.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.paytm.edc.launcher" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.hpcl_paytm.activity.home.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.HPCLPOS"
+            android:exported="true">
+            <intent-filter>
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.hpcl_paytm.activity.home.TerminalIdActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.HPCLPOS"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true"/>
     </application>
 
 

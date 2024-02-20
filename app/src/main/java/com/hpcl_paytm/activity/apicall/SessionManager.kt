@@ -1,7 +1,6 @@
 package com.hpcl_paytm.activity.apicall
 
 class SessionManager {
-    // Other session management properties and methods
 
     private var accessToken: String? = null
     private var accessTokenExpirationTime: Long? = null

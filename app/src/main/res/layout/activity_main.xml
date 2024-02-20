@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:id="@+id/container_layout"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.mainsaleactivities.MainActivity">
+   >
     <ImageView
         android:layout_width="match_parent"
         android:id="@+id/imageView_splash"
