@@ -27,7 +27,7 @@ import com.hpcl_paytm.activity.room.entity.SumAveragePojo
         ObjBanks::class, ObjFormFactors::class, ObjGetParentTransTypeDetail::class,
         ObjGetRegistrationProcessMerchant::class, ObjGetRegistrationProcessTrans::class,
         ObjProducts::class, Operators::class, Schema::class, SettlementReportInfo::class],
-    version = 4,
+    version = 1,
     exportSchema = false
 )
 abstract class AppRoomDatabase : RoomDatabase() {

@@ -1,17 +1,19 @@
 package com.hpcl_paytm.activity.apicall
 
+import com.hpcl_paytm.BuildConfig
+
 
 object Utils {
 
    // const val MAIN_URL= "https://dtpapitestv1.mloyalcapture.com" ///UAT Url
-    const val MAIN_URL= BuildConfig.MAIN_URL
+    const val MAIN_URL= "https://posapi.drivetrackplus.com"//BuildConfig.MAIN_URL
     const val DTP_TEST_URL="https://dtpapitestv1.mloyalcapture.com"
     const val HP_PAY_URL = "https://customerapi.hppay.in"
     const val HP_PAY_TXN_URL = "https://customerapi.mloyalretail.com"
-    const val UAT_URL = BuildConfig.HP_PAY //Uat Url
+    const val UAT_URL =""// BuildConfig.HP_PAY //Uat Url
 
     const val GET_GENERATE_TOKEN = "/api/dtplus/generate_token"
-    const val HP_PAY_REPORT_URL = BuildConfig.HP_PAY
+    const val HP_PAY_REPORT_URL = ""//BuildConfig.HP_PAY
     const val GET_CCMS_SALE = "/api/dtplus/transaction/sale_by_terminal"
     const val GET_TRACKING = "/api/dtplus/transaction/tracking_by_terminal"
     const val GET_DRIVER_DTP = "/api/dtplus/transaction/insert_driver_loyalty"

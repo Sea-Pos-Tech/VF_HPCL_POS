@@ -1,11 +1,15 @@
 package com.hpcl_paytm.activity.apicall
 
+import com.hpcl_paytm.activity.MyApplication
+import com.hpcl_paytm.activity.constants.Constants
+import com.hpcl_paytm.activity.constants.GlobalMethods
+import com.hpcl_paytm.activity.model.generateToken.GenerateTokenRequest
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class AuthInterceptor: Interceptor {
+class AuthInterceptor : Interceptor {
     // Other interceptor configuration and properties
 
     @Inject
@@ -19,12 +23,20 @@ class AuthInterceptor: Interceptor {
 
         if (accessToken != "" && sessionManager.isAccessTokenExpired()) {
 
+            val tokenRequestData = GenerateTokenRequest(
+                Constants.ANDROIDAGENT,
+                GlobalMethods.getTerminalId(MyApplication.appContext!!).toString(),
+                GlobalMethods.getDeviceId(MyApplication.appContext!!)
+            )
             // Make the token refresh request
             val refreshedToken = runBlocking {
-                val response = repository.getToken()
+                val response = repository.getGenerateToken(tokenRequestData)
                 // Update the refreshed access token and its expiration time in the session
-                sessionManager.updateAccessToken(response.accessToken, response.expiresIn)
-                response.accessToken
+                sessionManager.updateAccessToken(
+                    response.data?.Token.toString(),
+                    response.data?.ExpiryTime?.toLong()!!
+                )
+                response.data.Token
             }
 
             if (refreshedToken != null) {

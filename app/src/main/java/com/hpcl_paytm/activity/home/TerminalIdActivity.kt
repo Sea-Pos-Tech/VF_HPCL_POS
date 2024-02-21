@@ -3,6 +3,8 @@ package com.hpcl_paytm.activity.home
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.util.Base64
 import android.util.Log
@@ -10,9 +12,12 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import com.hpcl_paytm.R
 import com.hpcl_paytm.activity.MyApplication
 import com.hpcl_paytm.activity.SettlementDialog
@@ -26,6 +31,7 @@ import com.hpcl_paytm.activity.constants.ToastMessages
 import com.hpcl_paytm.activity.constants.TransactionUtils
 import com.hpcl_paytm.activity.constants.Validation
 import com.hpcl_paytm.activity.encryption_decryption.AesDesWrapper
+import com.hpcl_paytm.activity.room.repository.AppRepository
 import com.hpcl_paytm.activity.utils.RSAUtils
 import com.hpcl_paytm.databinding.ActivityMainBinding
 import com.hpcl_paytm.databinding.ActivityOperatoridBinding
@@ -152,7 +158,7 @@ class TerminalIdActivity : AppCompatActivity() {
             //val serverIp="https://posapi.mloyalcapture.com"
             //val serverIp="https://dtpapitestv1.mloyalcapture.com"
             var serverIp:String?=null
-            var url=AppRepository(this).getMerchantDetails()?.URL
+            var url= AppRepository().getMerchantDetails()?.URL
             if(url!=null && !url.equals("")) {
                 serverIp=url
             }else{
@@ -168,26 +174,92 @@ class TerminalIdActivity : AppCompatActivity() {
     }
 
     fun isNetworkAvailable() {
-        if(NetworkUtil.checkNetworkStatus(this)) {
-            val printer: PrinterTester = PrinterTester.instance!!
-            if(printer!=null) {
-                if (printer.status.trim().equals("Success")) {
-                    callRegistrationApi()
-                }else{
-                    runOnUiThread(Runnable {
-                        ToastMessages.customMsgToast(this, "Printer is Out of Paper?")
-                        settlementDialog?.dismiss()
-                    })
+        callRegistrationApi()
+
+    }
+
+    private fun callRegistrationApi() {
+        val performRegistartion = PerformRegistartion(this).constructRegistrationRequest()
+        val viewModel = ViewModelProvider(this).get(SettingDashboardViewModel::class.java)
+        if (performRegistartion != null) {
+            viewModel.makeApiRegistration(performRegistartion)
+        }
+        Log.e("Registration req","Registration Req:"+ Gson().toJson(performRegistartion))
+        viewModel.getliveRegistration()?.observe(this) { apiResponse ->
+            try {
+                if(apiResponse!=null) {
+                    when (apiResponse) {
+                       Result.Error -> {
+                            if(apiResponse.error.contains("Please Try Again",true)) {
+                                settlementDialog?.dismiss()
+                                getToken("")
+                            }
+                            else {
+                                callSettlementOnFailureDialog(resources.getString(R.string.internal_server_error))
+                            }
+                        }
+                        is com.paytm.hpclpos.livedatamodels.registrationapi.ApiResponse.RegistrationResponse -> {
+                            if (apiResponse.Success) {
+                                Log.e("apiResponse.Data","apiResponse.Data:"+ Gson().toJson(apiResponse))
+                                terminalId_edittext?.setText("")
+                                terminal_pin_editText?.setText("")
+                                confirm_terminal_pin_Edittext?.setText("")
+                                if (apiResponse.Internel_Status_Code == Constants.STATUS_SUCCESS) {
+                                    val data = apiResponse.Data
+                                    Log.e("apiResponse.Data","apiResponse.Data:"+ Gson().toJson(apiResponse.Data))
+                                    Log.e("apiResponse.Data","Merchant ID:"+ Gson().toJson(data.ObjGetMerchantDetail!![0].MerchantId))
+                                    Log.e("apiResponse.Data","TerminalId:"+ Gson().toJson(data.ObjGetMerchantDetail!![0].TerminalId))
+                                    if(data.ObjGetMerchantDetail!![0].MerchantId!=null && data.ObjGetMerchantDetail!![0].TerminalId!=null) {
+                                        settlementDialog!!.onSuccess()
+                                        Handler(Looper.getMainLooper()).postDelayed(
+                                            { settlementDialog!!.dismiss() }, 1000)
+                                        TransactionUtils.setBatchNumber(this,Constants.BATCH,data.ObjGetMerchantDetail!![0].BatchNo!!?:"1")
+                                        viewModel.storeRegistrationDataIntoDb(data, this)
+                                        if(!apiResponse.Data.ObjGetMerchantDetail?.get(0)?.Reason.equals("Last Batch is not Settled")) {
+                                            var serverTime:String?=AppRepository(this).getMerchantDetails()?.ServerTime
+                                            var ret=AppUtils.setServerTime(serverTime)
+                                            GlobalMethods.setIsTerminalPinFlag(this,false)
+                                            Log.e("Set Date Ret","Set Date return:"+ret)
+                                            if(flag==0) {
+                                                printRegisterReceipt()
+                                            }
+                                        }
+                                        GlobalMethods.setAutoSettleDateTime(data.ObjGetMerchantDetail!![0]?.ServerTime,this)
+                                    }else{
+                                        callSettlementOnFailureDialog(data.message)
+                                        ToastMessages.customMsgToast(this, "Registration Failed")
+                                    }
+
+                                }
+                            } else {
+                                if (apiResponse.Success==false) {
+                                    viewModel.getliveRegistration()?.removeObserver { this }
+                                    if(apiResponse.Message.equals("Token Expired")) {
+                                        settlementDialog!!.dismiss()
+                                        getToken("Register")
+                                    }else{
+                                        settlementDialog!!.dismiss()
+                                        Toast.makeText(this,""+apiResponse.Data.ObjGetMerchantDetail?.get(0)?.Reason,
+                                            Toast.LENGTH_LONG).show()
+                                        showPopupFailedReg(apiResponse.Data.ObjGetMerchantDetail?.get(0)?.Reason)
+                                        //  callSettlementOnFailureDialog(apiResponse.Data.ObjGetMerchantDetail?.get(0)?.Reason)
+                                    }
+                                }else{
+                                    callSettlementOnFailureDialog(this.resources.getString(R.string.internal_server_error))
+                                }
+                            }
+                        }
+                    }
+                }  else{
+                    callSettlementOnFailureDialog(this.resources.getString(R.string.internal_server_error))
+                    ToastMessages.customMsgToast(this, this.resources.getString(R.string.internal_server_error))
                 }
-            }else{
-                runOnUiThread(Runnable {
-                    ToastMessages.customMsgToast(this, "Printer is not Initialize?")
-                    settlementDialog?.dismiss()
-                })
             }
-        } else {
-            ToastMessages.noInternetConnectionToast(this)
-            settlementDialog?.dismiss()
+            catch (ex :Exception) {
+                ex.printStackTrace()
+                callSettlementOnFailureDialog("Exception")
+            }
+
         }
     }
 

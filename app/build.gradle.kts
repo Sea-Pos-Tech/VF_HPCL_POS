@@ -30,8 +30,9 @@ android {
         }
 
     }
+ /*   flavorDimensions += "version"
     productFlavors {
-        this.create("dev") {
+        create("dev") {
             dimension = "distribution"
             buildConfigField("String", "MAIN_URL", "\"https://posapi.drivetrackplus.com\"")
             buildConfigField("String", "HP_PAY", "\"https://customerapi.hppay.in\"")
@@ -42,7 +43,7 @@ android {
                 "\"PVmMSclp834KBIUa9O-XxpBsDJhsi1dsds74CiGaoo5\""
             )
         }
-        this.create("uat") {
+        create("uat") {
             dimension = "distribution"
             buildConfigField("String", "MAIN_URL", "\"https://posapi.drivetrackplus.com\"")
             buildConfigField("String", "HP_PAY", "\"https://customerapi.hppay.in\"")
@@ -54,7 +55,7 @@ android {
             )
 
         }
-    }
+    }*/
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -68,16 +69,15 @@ android {
         buildConfig = true
         aidl = true
     }
-
-
     sourceSets.getByName("main") {
-        java.srcDirs("src/main/java", "src/main/aidl")
+        aidl.srcDirs("src/main/java", "src/main/aidl")
     }
 
 
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar"))))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -101,7 +101,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
 
-    // Kotlin Extensions and Coroutines support for Room
+// Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
@@ -116,7 +116,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
-    // Coroutine Lifecycle Scopes
+// Coroutine Lifecycle Scopes
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
@@ -128,9 +128,9 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     implementation("com.intuit.sdp:sdp-android:1.0.6")
-    // For MasterKey
+// For MasterKey
     implementation("androidx.security:security-crypto:1.1.0-alpha01")
-    // For EncryptedSharedPreferences
+// For EncryptedSharedPreferences
     implementation("androidx.security:security-crypto:1.0.0")
 
 }
